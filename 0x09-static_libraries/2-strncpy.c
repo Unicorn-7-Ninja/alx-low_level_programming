@@ -1,4 +1,6 @@
 #include "main.h"
+#include <stddef.h>
+
 /**
 * _strncpy - do thing
 * @dest: dest
