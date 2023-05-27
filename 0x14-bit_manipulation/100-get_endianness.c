@@ -1,13 +1,23 @@
 #include "main.h"
+#include <stdio.h>
 
 /**
- * get_endianness - create in github - checks if a machine is little or big endian
- * Return: 0 for big, 1 for little
- */
-int get_endianness(void)
-{
-	unsigned int i = 1;
-	char *c = (char *) &i;
+ * 
+ * Checks if the system is big endian 
+ * 
+ * Always return: 0 if big endian, 1 if little endian
+ *
+ **/
 
-	return (*c);
+int get_endianness(void)
+
+{
+	int num;
+	char *adrs;
+
+	num = 2;
+	adrs = (char *)&num;
+	if (*adrs)
+		return (1);
+	return (0);
 }
