@@ -1,11 +1,11 @@
 #include "main.h"
 
 /**
- * get_bit node in - returns the value of a bit at an index in a decimal number
- * @n: number to search
- * @index: index of the bit
+ * get_bit - retourne la valeur d'un bit à un indice donné dans un nombre décimal
+ * @n: nombre à rechercher
+ * @index: indice du bit
  *
- * Return: value of the bit
+ * Return: valeur du bit
  */
 int get_bit(unsigned long int n, unsigned int index)
 {
