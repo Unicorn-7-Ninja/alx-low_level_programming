@@ -1,7 +1,7 @@
 #include "main.h"
 
 /**
- * print_binary - affiche equal binaire nombre décimal
+ * print_binary - affiche l'équivalent binaire d'un nombre décimal
  * @n: nombre à afficher en binaire
  */
 void print_binary(unsigned long int n)
@@ -22,7 +22,7 @@ void print_binary(unsigned long int n)
 		else if (count)
 			_putchar('0');
 	}
-	
+
 	if (!count)
 		_putchar('0');
 }
