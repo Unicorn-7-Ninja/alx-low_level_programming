@@ -1,12 +1,13 @@
 #include "main.h"
 
 /**
- * print_binary node in - prints the binary equivalent of a decimal number
- * @n: number to print in binary
+ * print_binary - affiche equal binaire nombre décimal
+ * @n: nombre à afficher en binaire
  */
 void print_binary(unsigned long int n)
 {
-	int i, count = 0;
+	int i;
+	int count = 0;
 	unsigned long int current;
 
 	for (i = 63; i >= 0; i--)
@@ -21,6 +22,7 @@ void print_binary(unsigned long int n)
 		else if (count)
 			_putchar('0');
 	}
+	
 	if (!count)
 		_putchar('0');
 }
