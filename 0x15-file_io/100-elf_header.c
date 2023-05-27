@@ -11,28 +11,23 @@ void print_magic(unsigned char *e_ident);
 void print_class(unsigned char *e_ident);
 void print_data(unsigned char *e_ident);
 void print_version(unsigned char *e_ident);
-void print_osabi(unsigned char *e_ident);
 void print_abi(unsigned char *e_ident);
+void print_osabi(unsigned char *e_ident);
 void print_type(unsigned int e_type, unsigned char *e_ident);
 void print_entry(unsigned long int e_entry, unsigned char *e_ident);
 void close_elf(int elf);
 
 /**
- * check_elf - Checks if the file is an ELF file.
+ * check_elf - Checks if the file is a valid ELF file.
  * @e_ident: A pointer to an array containing the ELF magic numbers.
  *
  * Description: If the file is not an ELF file, it exits with code 98.
  */
 void check_elf(unsigned char *e_ident)
 {
-    int index;
-
-    for (index = 0; index < 4; index++)
+    for (int index = 0; index < 4; index++)
     {
-        if (e_ident[index] != 127 &&
-            e_ident[index] != 'E' &&
-            e_ident[index] != 'L' &&
-            e_ident[index] != 'F')
+        if (e_ident[index] != ELFMAG[index])
         {
             dprintf(STDERR_FILENO, "Error: Not an ELF file\n");
             exit(98);
@@ -48,16 +43,17 @@ void check_elf(unsigned char *e_ident)
  */
 void print_magic(unsigned char *e_ident)
 {
-    int index;
-
     printf(" Magic: ");
 
-    for (index = 0; index < 16; index++)
+    for (int index = 0; index < EI_NIDENT; index++)
     {
-        printf("%02x ", e_ident[index]);
-    }
+        printf("%02x", e_ident[index]);
 
-    printf("\n");
+        if (index == EI_NIDENT - 1)
+            printf("\n");
+        else
+            printf(" ");
+    }
 }
 
 /**
@@ -120,9 +116,6 @@ void print_version(unsigned char *e_ident)
 
     switch (e_ident[EI_VERSION])
     {
-        case EV_NONE:
-            printf(" (invalid)\n");
-            break;
         case EV_CURRENT:
             printf(" (current)\n");
             break;
@@ -144,9 +137,6 @@ void print_osabi(unsigned char *e_ident)
     {
         case ELFOSABI_NONE:
             printf("UNIX - System V\n");
-            break;
-        case ELFOSABI_SYSV:
-            printf("UNIX - System V ABI\n");
             break;
         case ELFOSABI_HPUX:
             printf("UNIX - HP-UX\n");
